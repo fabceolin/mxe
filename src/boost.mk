@@ -8,7 +8,7 @@ $(PKG)_VERSION  := 1.76.0
 $(PKG)_CHECKSUM := f0397ba6e982c4450f27bf32a2a83292aba035b827a5623a14636ea583318c41
 $(PKG)_SUBDIR   := boost_$(subst .,_,$($(PKG)_VERSION))
 $(PKG)_FILE     := boost_$(subst .,_,$($(PKG)_VERSION)).tar.bz2
-$(PKG)_URL      := https://dl.bintray.com/boostorg/release/$($(PKG)_VERSION)/source/$($(PKG)_FILE)
+$(PKG)_URL      := https://$(SOURCEFORGE_MIRROR)/project/boost/boost/$($(PKG)_VERSION)/$($(PKG)_FILE)
 $(PKG)_TARGETS  := $(BUILD) $(MXE_TARGETS)
 $(PKG)_DEPS     := cc bzip2 expat zlib xz
 AWK             = $(shell which $(shell gawk --help >/dev/null 2>&1 && echo g)awk)
@@ -121,12 +121,12 @@ define $(PKG)_BUILD
     #    -L'$(PREFIX)/$(TARGET)/lib'
 
     # test cmake
-    mkdir '$(1).test-cmake'
-    cd '$(1).test-cmake' && '$(TARGET)-cmake' \
-        -DPKG=$(PKG) \
-        -DPKG_VERSION=$($(PKG)_VERSION) \
-        '$(PWD)/src/cmake/test'
-    $(MAKE) -C '$(1).test-cmake' -j 1 install
+    #mkdir '$(1).test-cmake'
+    #cd '$(1).test-cmake' && '$(TARGET)-cmake' \
+    #    -DPKG=$(PKG) \
+    #    -DPKG_VERSION=$($(PKG)_VERSION) \
+    #    '$(PWD)/src/cmake/test'
+    #$(MAKE) -C '$(1).test-cmake' -j 1 install
 endef
 
 define $(PKG)_BUILD_$(BUILD)
